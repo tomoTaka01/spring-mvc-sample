@@ -1,6 +1,5 @@
 package com.example.springmvcsample.domain;
 
-import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -25,7 +24,7 @@ public class PersonForm {
     @DateTimeFormat(pattern = "uuuu-MM-dd")
     private LocalDate birthDay;
 
-    @Digits(integer=10, fraction = 0)
+    @Digits(integer = 10, fraction = 0)
     @NumberFormat(pattern = "#,###")
     private BigDecimal salary;
 
