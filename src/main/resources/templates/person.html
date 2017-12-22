@@ -4,7 +4,7 @@
     <title>person</title>
 </head>
 <body>
-<form action="#" th:action="@{/person/valid}" th:object="${person}" method="post">
+<form action="#" th:action="@{/person/valid}" th:object="${personForm}" method="post">
     <div>
         <label>first name:</label>
         <input type="text" th:field="*{firstName}"/>
@@ -18,14 +18,17 @@
     <div>
         <label>age:</label>
         <input type="text" th:field="*{age}"/>
+        <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</p>
     </div>
     <div>
         <label>birth day:</label>
-        <input type="text" th:field="*{birthDay}"/>
+        <input type="date" th:field="*{birthDay}"/>
+        <p th:if="${#fields.hasErrors('birthDay')}" th:errors="*{birthDay}">age error</p>
     </div>
     <div>
         <label>salary:</label>
         <input type="text" th:field="*{salary}"/>
+        <p th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}">age error</p>
     </div>
 
     <button type="submit" name="valid">valid</button>

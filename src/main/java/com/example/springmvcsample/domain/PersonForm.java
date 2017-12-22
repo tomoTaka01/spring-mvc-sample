@@ -1,33 +1,38 @@
 package com.example.springmvcsample.domain;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Person {
+public class PersonForm {
     @NotEmpty
-    @Length(max = 10)
     private String firstName;
 
     @NotEmpty
-    @Length(max = 10)
     private String lastName;
 
+    @Max(100)
     private Integer age;
 
+    @Past
+    @DateTimeFormat(pattern = "uuuu-MM-dd")
     private LocalDate birthDay;
 
     @Digits(integer=10, fraction = 0)
+    @NumberFormat(pattern = "#,###")
     private BigDecimal salary;
 
-    public Person() {
+    public PersonForm() {
     }
 
-    public Person(String firstName, String lastName, Integer age, LocalDate birthDay, BigDecimal salary) {
+    public PersonForm(String firstName, String lastName, Integer age, LocalDate birthDay, BigDecimal salary) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -77,7 +82,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "PersonForm{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +

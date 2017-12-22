@@ -1,7 +1,6 @@
 package com.example.springmvcsample.controller;
 
-import com.example.springmvcsample.domain.Person;
-import com.sun.tools.internal.xjc.model.Model;
+import com.example.springmvcsample.domain.PersonForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,27 +11,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/person")
 public class PersonController {
     private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
 
     @ModelAttribute
-    public Person setUp(){
-        Person person = new Person();
+    public PersonForm setUp() {
+        PersonForm personForm = new PersonForm();
         // set init value
-        person.setFirstName("first Name1");
-        person.setLastName("last name1");
-        return person;
+        personForm.setFirstName("first Name1");
+        personForm.setLastName("last name1");
+        return personForm;
     }
 
-    @RequestMapping("/person")
-    public String showPerson(){
-        logger.info("show person");
-        return "/person" ;
+    @RequestMapping("/")
+    public String home() {
+        logger.info("home");
+        return "/person";
     }
 
-    @PostMapping("/person/valid")
-    public String valid(@Validated Person person, BindingResult bindingResult ){
-        logger.info("valid");
+    @PostMapping("/valid")
+    public String valid(@Validated PersonForm personForm, BindingResult bindingResult) {
+        logger.info("person valid");
+        bindingResult.getAllErrors().forEach(e -> logger.error("error=[{}]", e.getDefaultMessage()));
+
         return "person";
     }
 }
